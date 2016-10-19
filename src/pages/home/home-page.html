@@ -3,21 +3,21 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Find a cocktail</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar (ionInput)="getCocktails($event)"></ion-searchbar>
+  <ion-searchbar (ionInput)="getCocktails($event)" placeholder="Find a cocktail"></ion-searchbar>
   
-  <ion-list>
-    <ion-item *ngFor="let cocktail of allCocktails">
+  <ion-card *ngFor="let cocktail of allCocktails">
+    <ion-item (click)="goToCocktailPage(cocktail)">
       <ion-avatar item-left>
         <img src="{{cocktail.imageUrl}}">
       </ion-avatar>
       <h2>{{cocktail.name}}</h2>
       <p>something should be here</p>
     </ion-item>
-  </ion-list>
+  </ion-card>
 
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-
 import { NavController } from 'ionic-angular';
+
+import { CocktailPage } from '../';
 
 @Component({
   selector: 'home-page',
@@ -10,8 +11,13 @@ export class HomePage {
 
   allCocktails : any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(private navCtrl: NavController) {
     
+  }
+
+  goToCocktailPage(cocktail){
+    console.log(cocktail);
+      this.navCtrl.push(CocktailPage, cocktail);
   }
 
   getCocktails($event){
