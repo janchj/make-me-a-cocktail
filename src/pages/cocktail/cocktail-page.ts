@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-
 import { NavController, NavParams } from 'ionic-angular';
+
+import { CocktailService } from '../../shared'
 
 @Component({
   selector: 'cocktail-page',
@@ -8,10 +9,20 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class CocktailPage {
 
-    cocktailSelected : any;
+    cocktailId : any;
+    cocktail: any;
     
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.cocktailSelected = this.navParams.data;
+  constructor(private navParams: NavParams,
+              private cocktailApi: CocktailService) {
+                this.cocktailId = this.navParams.data;
+  }
+
+ionWillLoad(){
+  console.log(this.cocktailId);
+  this.cocktailApi.getDrinkById(this.cocktailId).subscribe( data =>{
+    console.log(data);
+    this.cocktail = data.result;
+  });
 }
 
 }

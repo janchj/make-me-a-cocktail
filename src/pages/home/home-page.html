@@ -8,10 +8,10 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar (ionInput)="getCocktails($event)" placeholder="Find a cocktail"></ion-searchbar>
+  <ion-searchbar (search)="getCocktails($event)" placeholder="Find a cocktail"></ion-searchbar>
   
   <ion-card *ngFor="let cocktail of allCocktails">
-    <ion-item (click)="goToCocktailPage(cocktail)">
+    <ion-item (click)="goToCocktailPage(cocktail.id)">
       <ion-avatar item-left>
         <img src="{{cocktail.imageUrl}}">
       </ion-avatar>

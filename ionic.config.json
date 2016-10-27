@@ -1,6 +1,12 @@
 {
   "name": "make-me-a-cocktail",
-  "app_id": "",
+  "app_id": "46026546",
   "v2": true,
-  "typescript": true
+  "typescript": true,
+  "proxies": [
+    {
+        "path" : "/api",
+        "proxyUrl": "https://addb.absolutdrinks.com"
+    }
+]
 }

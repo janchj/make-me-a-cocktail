@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { CocktailPage } from '../';
+import { CocktailService } from '../../shared';
 
 @Component({
   selector: 'home-page',
@@ -11,68 +12,23 @@ export class HomePage {
 
   allCocktails : any;
 
-  constructor(private navCtrl: NavController) {
-    
+  constructor(private navCtrl: NavController,
+              private cocktailApi: CocktailService) {       
   }
 
-  goToCocktailPage(cocktail){
-    console.log(cocktail);
-      this.navCtrl.push(CocktailPage, cocktail);
+  ionViewWillLoad(){
+  }
+
+  goToCocktailPage(cocktailId){
+      console.log(cocktailId);
+      this.navCtrl.push(CocktailPage, cocktailId);
   }
 
   getCocktails($event){
-      console.log($event.target.value);
-      this.allCocktails =[
-        {
-        "id": 'cubalibre',
-        "name": 'Cuba Libre',
-        "imageUrl": 'http://havana-club.ca/sites/default/files/cuba_libre.png',
-        "instructions": 'Pour lime juice into a highball glass over ice cubes. Add rum, fill with cola, stir, and serve.',
-        "ingredients" : [{
-          "id" : "lime",
-          "name": "Lime Juice",
-          "measure" : 15,
-          "unit" : "ml"
-        },
-        {
-          "id" : "rum",
-          "name": "Rum",
-          "measure" : 50,
-          "unit" : "ml"
-        },
-        {
-          "id" : "coke",
-          "name": "Coke",
-          "measure" : 200,
-          "unit" : "ml"
-        }
-        ]},
-        {
-        "id": 'mojito',
-        "name": 'Mojito',
-        "imageUrl": 'http://havana-club.ca/sites/default/files/cuba_libre.png',
-        "instructions": 'Pour lime juice into a highball glass over ice cubes. Add rum, fill with cola, stir, and serve.',
-        "ingredients" : [{
-          "id" : "lime",
-          "name": "Lime Juice",
-          "measure" : 15,
-          "unit" : "ml"
-        },
-        {
-          "id" : "rum",
-          "name": "Rum",
-          "measure" : 50,
-          "unit" : "ml"
-        },
-        {
-          "id" : "coke",
-          "name": "Coke",
-          "measure" : 200,
-          "unit" : "ml"
-        }
-        ]},
-      ]
-
+    this.cocktailApi.getDrinksByKeyword($event.target.value)
+        .subscribe( data => {
+          this.allCocktails = data.result;
+        });
 
   }
 
