@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { CocktailPage } from '../';
-import { CocktailService } from '../../shared';
+import { CocktailService, AssetService } from '../../shared';
 
 @Component({
   selector: 'home-page',
@@ -13,15 +13,16 @@ export class HomePage {
   allCocktails : any;
 
   constructor(private navCtrl: NavController,
-              private cocktailApi: CocktailService) {       
+              private cocktailApi: CocktailService,
+              private assetApi: AssetService) {       
   }
 
   ionViewWillLoad(){
   }
 
-  goToCocktailPage(cocktailId){
-      console.log(cocktailId);
-      this.navCtrl.push(CocktailPage, cocktailId);
+  goToCocktailPage(cocktail){
+      console.log(cocktail);
+      this.navCtrl.push(CocktailPage, cocktail);
   }
 
   getCocktails($event){
@@ -29,7 +30,18 @@ export class HomePage {
         .subscribe( data => {
           this.allCocktails = data.result;
         });
+  }
 
+  getCocktailImageUrl(id){
+    return this.assetApi.getAssetUrlByIdAndSize(id,300,400);
+  }
+
+  getCocktailTastingNotes(notes){
+    let fullNotes = '';
+    notes.forEach(element => {
+      fullNotes += (fullNotes) ? ', ' + element.text : element.text;
+    });
+    return fullNotes;
   }
 
 }

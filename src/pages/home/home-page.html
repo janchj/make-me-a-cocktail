@@ -11,12 +11,12 @@
   <ion-searchbar (search)="getCocktails($event)" placeholder="Find a cocktail"></ion-searchbar>
   
   <ion-card *ngFor="let cocktail of allCocktails">
-    <ion-item (click)="goToCocktailPage(cocktail.id)">
+    <ion-item (click)="goToCocktailPage(cocktail)">
       <ion-avatar item-left>
-        <img src="{{cocktail.imageUrl}}">
+        <img src="{{getCocktailImageUrl(cocktail.id)}}">
       </ion-avatar>
       <h2>{{cocktail.name}}</h2>
-      <p>something should be here</p>
+      <p>Something... {{getCocktailTastingNotes(cocktail.tastes)}}</p>
     </ion-item>
   </ion-card>
 

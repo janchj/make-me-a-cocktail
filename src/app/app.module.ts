@@ -4,7 +4,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HomePage, CocktailPage } from '../pages';
-import { CocktailService } from '../shared';
+import { CocktailService, AssetService } from '../shared';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { CocktailService } from '../shared';
     CocktailPage
   ],
   providers: [
-    CocktailService
+    CocktailService,
+    AssetService
   ]
 })
 export class AppModule {}
