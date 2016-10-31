@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
-//import { Storage } from '@ionic/storage';
-import { SQLite } from 'ionic-native';
 
 import { MyApp } from './app.component';
 import { HomePage, CocktailPage, FavouritesPage } from '../pages';
@@ -27,7 +25,6 @@ import { CocktailService, AssetService, FavouritesService } from '../shared';
   providers: [
     CocktailService,
     AssetService,
-    SQLite,
     FavouritesService
   ]
 })

@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 export class FavouritesService {  
     db = new SQLite();
 
-    constructor(db: SQLite) {
-        
+    constructor() {
+
     }
 
     getAllFavourites(){
