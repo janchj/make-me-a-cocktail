@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+//import { Storage } from '@ionic/storage';
 import { SQLite } from 'ionic-native';
 
 import { MyApp } from './app.component';
@@ -27,7 +27,7 @@ import { CocktailService, AssetService, FavouritesService } from '../shared';
   providers: [
     CocktailService,
     AssetService,
-    Storage,
+    SQLite,
     FavouritesService
   ]
 })
