@@ -9,7 +9,6 @@ import { CocktailService, AssetService } from '../../shared';
   templateUrl: 'home-page.html'
 })
 export class HomePage {
-
   allCocktails : any;
 
   constructor(private navCtrl: NavController,
@@ -42,6 +41,10 @@ export class HomePage {
       fullNotes += (fullNotes) ? ', ' + element.text : element.text;
     });
     return fullNotes;
+  }
+
+  setCocktailAsFavourite(cocktail){
+    //this.storage.set(cocktail.id, JSON.stringify(cocktail));
   }
 
 }

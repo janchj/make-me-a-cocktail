@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { SQLite } from 'ionic-native';
 
 import { MyApp } from './app.component';
-
-import { HomePage, CocktailPage } from '../pages';
-import { CocktailService, AssetService } from '../shared';
+import { HomePage, CocktailPage, FavouritesPage } from '../pages';
+import { CocktailService, AssetService, FavouritesService } from '../shared';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    CocktailPage
+    CocktailPage,
+    FavouritesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -19,11 +21,14 @@ import { CocktailService, AssetService } from '../shared';
   entryComponents: [
     MyApp,
     HomePage,
-    CocktailPage
+    CocktailPage,
+    FavouritesPage
   ],
   providers: [
     CocktailService,
-    AssetService
+    AssetService,
+    Storage,
+    FavouritesService
   ]
 })
 export class AppModule {}
