@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import _ from 'lodash';
 
+import { CocktailPage } from '../';
 import { FavouritesService } from '../../shared'
 
 @Component({
@@ -9,15 +11,31 @@ import { FavouritesService } from '../../shared'
 })
 export class FavouritesPage {
 
-  favourites : any = [];
+  favourites : any;
 
   constructor(private navCtrl: NavController,
               private favouritesService: FavouritesService) {
   }
 
+  ionViewWillLoad(){
+    this.favouritesService.getAllFavourites()
+                          .subscribe((data: Array<any>) => {
+                            this.favourites = data;
+    });
+  }
 
-ionViewWillEnter(){
-  this.favouritesService.getAllFavourites();
-}
+    goToCocktailPage(cocktail){
+      this.navCtrl.push(CocktailPage, cocktail);
+  }
+
+    removeCocktailFromFavorite(cocktail){
+    this.favouritesService.removeFavourite(cocktail)
+        .then( data => {
+          console.log('removed');
+        })
+        .catch(error =>{
+          console.log(error);
+        })
+  }
 
 }

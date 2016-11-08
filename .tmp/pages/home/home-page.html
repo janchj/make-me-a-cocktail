@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar (search)="getCocktails($event)" placeholder="Find a cocktail"></ion-searchbar>
+  
+  <ion-card *ngFor="let cocktail of allCocktails">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{getCocktailImageUrl(cocktail.id)}}">
+      </ion-avatar>
+      <h2 (click)="goToCocktailPage(cocktail)">{{cocktail.name}}</h2>
+       <ion-icon name="star" (click)="setCocktailAsFavourite(cocktail)"></ion-icon>
+      <p>Something... {{getCocktailTastingNotes(cocktail.tastes)}}</p>
+    </ion-item>
+  </ion-card>
+
+</ion-content>

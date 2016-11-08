@@ -15,12 +15,8 @@ export class HomePage {
               private cocktailApi: CocktailService,
               private assetApi: AssetService) {       
   }
-
-  ionViewWillLoad(){
-  }
-
+  
   goToCocktailPage(cocktail){
-      console.log(cocktail);
       this.navCtrl.push(CocktailPage, cocktail);
   }
 
@@ -41,10 +37,6 @@ export class HomePage {
       fullNotes += (fullNotes) ? ', ' + element.text : element.text;
     });
     return fullNotes;
-  }
-
-  setCocktailAsFavourite(cocktail){
-    //this.storage.set(cocktail.id, JSON.stringify(cocktail));
   }
 
 }

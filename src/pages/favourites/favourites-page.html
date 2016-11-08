@@ -9,8 +9,14 @@
 
 <ion-content>
 
-<ion-list *ngFor="let favourite of favourites">
-  <ion-item>{{favourite}}</ion-item>
-</ion-list>
+<ion-card *ngFor="let favourite of favourites">
+    <ion-item>
+      <h2 (click)="goToCocktailPage(favourite)">{{favourite.name}}</h2>
+      <button ion-button (click)="removeCocktailFromFavorite(favourite)">
+      Remove from list
+      <ion-icon name="star"></ion-icon>
+    </button>
+    </ion-item>
+  </ion-card>
 
 </ion-content>

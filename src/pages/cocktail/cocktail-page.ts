@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 
-import { CocktailService } from '../../shared'
+import { CocktailService, FavouritesService } from '../../shared'
 
 @Component({
   selector: 'cocktail-page',
@@ -13,8 +13,19 @@ export class CocktailPage {
     imageUrl: any;
     
   constructor(private navParams: NavParams,
-              private cocktailApi: CocktailService) {
+              private cocktailApi: CocktailService,
+              private favouritesService: FavouritesService) {
                 this.cocktail = this.navParams.data;
+  }
+
+  setCocktailAsFavorite(cocktail){
+    this.favouritesService.setFavourite(cocktail)
+        .then( data => {
+          console.log('works');
+        })
+        .catch(error =>{
+          console.log(error);
+        })
   }
 
 }

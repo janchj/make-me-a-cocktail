@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, SQLite } from 'ionic-native';
+import { StatusBar } from 'ionic-native';
+import firebase from 'firebase';
 
-import { HomePage, CocktailPage, FavouritesPage } from '../pages'
+import { HomePage, FavouritesPage } from '../pages'
 
 @Component({
   templateUrl: 'app.html'
@@ -26,24 +27,22 @@ export class MyApp {
   }
 
   initializeApp() {
+
+    // init db
+    const fbConf = {
+          apiKey: 'AIzaSyBAAze9r8bB4gkvA9drz-DSp3huiqig8zo',
+          authDomain: 'make-me-a-cocktail.firebaseapp.com',
+          databaseURL: 'https://make-me-a-cocktail.firebaseio.com',
+          storageBucket: 'make-me-a-cocktail.appspot.com',
+          messagingSenderId: '855482944555'
+        };
+        
+    firebase.initializeApp(fbConf);
+
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-
-      let db = new SQLite();
-      db.openDatabase({
-                name: "data.db",
-                location: "default"
-            }).then(() => {
-                db.executeSql("CREATE TABLE IF NOT EXISTS favourites (id INTEGER PRIMARY KEY)", {}).then((data) => {
-                    console.log("TABLE CREATED: ", data);
-                }, (error) => {
-                    console.error("Unable to execute sql", error);
-                })
-            }, (error) => {
-                console.error("Unable to open database", error);
-            });
     });
   }
 
