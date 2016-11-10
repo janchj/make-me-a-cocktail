@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import _ from 'lodash';
 
 import { CocktailPage } from '../';
@@ -11,31 +11,50 @@ import { FavouritesService } from '../../shared'
 })
 export class FavouritesPage {
 
-  favourites : any;
+  favourites : any = null;
 
   constructor(private navCtrl: NavController,
+              private loadingCtrl: LoadingController,
               private favouritesService: FavouritesService) {
   }
 
   ionViewWillLoad(){
+
+    let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+    
+    loading.present();
     this.favouritesService.getAllFavourites()
                           .subscribe((data: Array<any>) => {
                             this.favourites = data;
+                            loading.dismiss();
     });
   }
 
-    goToCocktailPage(cocktail){
+  goToCocktailPage(cocktail){
       this.navCtrl.push(CocktailPage, cocktail);
   }
 
-    removeCocktailFromFavorite(cocktail){
+  isFavouritesListEmpty(){
+    return (_.isEmpty(this.favourites));
+  }
+
+  removeCocktailFromFavorite(cocktail){
+
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+  
+    loading.present();
+
     this.favouritesService.removeFavourite(cocktail)
-        .then( data => {
-          console.log('removed');
-        })
-        .catch(error =>{
-          console.log(error);
-        })
+      .then( data => {
+        loading.dismiss();
+      })
+      .catch(error =>{
+        console.log(error);
+      })
   }
 
 }

@@ -11,11 +11,6 @@ export class FavouritesService {
     }
 
     getAllFavourites(){
-        /*return this.favouritesService.on("value", data => {
-            console.log(data.val());
-            return data.val();
-        });*/
-
         return new Observable(observer => {
             this.favouritesService.on('value',
                 (snapshot) => {
@@ -28,7 +23,7 @@ export class FavouritesService {
                     observer.next(arr)
                 },
                 (error) => {
-                    console.log("ERROR:", error)
+                    console.log('ERROR:', error)
                     observer.error(error)
                 });
         });
@@ -47,7 +42,7 @@ export class FavouritesService {
     }
 
     getFavourite(favouriteId){
-        return this.favouritesService.child(favouriteId).once("value", function(data) {
+        return this.favouritesService.child(favouriteId).once('value', function(data) {
             return data;
         });
     }

@@ -16,7 +16,6 @@
         <img src="{{getCocktailImageUrl(cocktail.id)}}">
       </ion-avatar>
       <h2 (click)="goToCocktailPage(cocktail)">{{cocktail.name}}</h2>
-       <ion-icon name="star" (click)="setCocktailAsFavourite(cocktail)"></ion-icon>
       <p>Something... {{getCocktailTastingNotes(cocktail.tastes)}}</p>
     </ion-item>
   </ion-card>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
+import _ from 'lodash';
 
 import { CocktailPage } from '../';
 import { CocktailService, AssetService } from '../../shared';
@@ -12,8 +13,12 @@ export class HomePage {
   allCocktails : any;
 
   constructor(private navCtrl: NavController,
+              private toastCtrl: ToastController,
               private cocktailApi: CocktailService,
               private assetApi: AssetService) {       
+  }
+
+  ionViewWillLoad(){
   }
   
   goToCocktailPage(cocktail){
@@ -24,6 +29,9 @@ export class HomePage {
     this.cocktailApi.getDrinksByKeyword($event.target.value)
         .subscribe( data => {
           this.allCocktails = data.result;
+          if(_.isEmpty(data.result)){
+            this.showToastInformation('Sorry, no cocktails matching your search');
+          }
         });
   }
 
@@ -38,5 +46,14 @@ export class HomePage {
     });
     return fullNotes;
   }
+
+  showToastInformation(message) {
+  let toast = this.toastCtrl.create({
+    message: message,
+    duration: 1500,
+    position: 'top'
+  });
+  toast.present();
+}
 
 }
